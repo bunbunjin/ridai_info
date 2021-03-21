@@ -12,23 +12,19 @@ def line_massage(line_massage_notification):
     requests.post(line_api, headers=headers, data=data)
 
 
-print(info())
-
-
 def check():
-    date_, link_, links_ = info()
-    after = schedule.every(1).hours.do(info)
-    before = schedule.every(5).minutes.do(info)
-    schedule.run_pending()
-    if after == before:
-        print('前のデータと変わらない')
-    else:
-        print("successfull")
-        print(f'{info()[0]}\n{info()[1]}')
-        return date_, link_
+    while True:
+        bef = info()
+        time.sleep(3600)
+        aft = info()
+        if aft == bef:
+            print(aft, 'kore')
+            print('前のデータと変わらない')
+            pass
+        else:
+            print("successfull")
+            template = f'{aft()[2]}\n{aft()[1]}'
+            line_massage(template)
 
 
-while True:
-    schedule.run_pending()
-
-    time.sleep(3)
+check()
