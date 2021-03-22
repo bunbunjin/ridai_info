@@ -18,8 +18,6 @@ def check():
         time.sleep(3600)
         aft = info()
         if aft == bef:
-            print(aft, 'kore')
-            print('前のデータと変わらない')
             pass
         else:
             print("successfull")
